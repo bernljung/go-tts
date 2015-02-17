@@ -18,7 +18,7 @@ func (t TTS) Play() {
 	v.Add("q", t.Q)
 	v.Add("ie", "UTF-8")
 	query := "?" + v.Encode()
-	log.Println("Command:", "mpg123", "-user-agent", "Mozilla", tts_url+query)
-	out, err := exec.Command("mpg123", "-user-agent", "Mozilla", tts_url+query).Output()
+	log.Println("Command:", "mpg123", tts_url+query)
+	out, err := exec.Command("mpg123", tts_url+query).Output()
 	log.Println("command:", out, err)
 }
