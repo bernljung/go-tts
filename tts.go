@@ -1,6 +1,7 @@
 package tts
 
 import (
+	"fmt"
 	"log"
 	"net/url"
 	"os/exec"
@@ -19,6 +20,11 @@ func (t TTS) Play() {
 	v.Add("ie", "UTF-8")
 	query := "?" + v.Encode()
 	log.Println("Command:", "mpg123", tts_url+query)
-	out, err := exec.Command("mpg123", tts_url+query).Output()
-	log.Println("command:", out, err)
+	output, err := exec.Command("mpg123", tts_url+query).CombinedOutput()
+	if err != nil {
+		fmt.Println(fmt.Sprint(err) + ": " + string(output))
+		return
+	} else {
+		fmt.Println(string(output))
+	}
 }
